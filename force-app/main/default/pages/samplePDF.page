@@ -1,0 +1,96 @@
+<apex:page controller="samplePDFController" renderAs="pdf" showHeader="false" applyHtmlTag="false">
+  <html>
+    <head>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          margin: 20px;
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .header h1 {
+          font-size: 24px;
+          color: #333;
+        }
+        .company-info {
+          margin-bottom: 20px;
+        }
+        .company-info p {
+          margin: 0;
+          font-size: 14px;
+        }
+        .quotation-details {
+          margin-bottom: 20px;
+        }
+        .quotation-details table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .quotation-details th,
+        .quotation-details td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        .quotation-details th {
+          background-color: #f2f2f2;
+        }
+        .total {
+          text-align: right;
+          margin-top: 20px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>Quotation</h1>
+      </div>
+
+      <div class="company-info">
+        <p><strong>Company Name:</strong> Your Company Name</p>
+        <p><strong>Address:</strong> 123 Main St, City, Country</p>
+        <p><strong>Phone:</strong> +1 234 567 890</p>
+        <p><strong>Email:</strong> info@yourcompany.com</p>
+      </div>
+
+      <div class="quotation-details">
+        <p><strong>Opportunity Name:</strong> {!opportunity.Name}</p>
+        <p><strong>Account:</strong> {!opportunity.Account.Name}</p>
+        <p><strong>Close Date:</strong> {!opportunity.CloseDate}</p>
+        <p><strong>Stage:</strong> {!opportunity.StageName}</p>
+      </div>
+
+      <div class="quotation-details">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <apex:repeat value="{!lineItems}" var="item">
+              <tr>
+                <td>{!item.Product2.Name}</td>
+                <td>{!item.Quantity}</td>
+                <td>{!item.UnitPrice}</td>
+                <td>{!item.TotalPrice}</td>
+              </tr>
+            </apex:repeat>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="total">
+        <p><strong>Total Amount:</strong> ${!opportunity.Amount}</p>
+      </div>
+    </body>
+  </html>
+</apex:page>
